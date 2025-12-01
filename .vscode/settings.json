@@ -1,0 +1,18 @@
+{
+    "cucumber.glue": [
+        "*specs*/**/*.cs",
+        "features/**/*.js",
+        "features/**/*.jsx",
+        "features/**/*.py",
+        "features/**/*.rs",
+        "features/step_definitions/*.ts",
+        "features/**/*.tsx",
+        "features/**/*_test.go",
+        "src/test/**/*.java",
+        "tests/**/*.py",
+    ],
+    "cucumberautocomplete.steps": [
+        "features/step_definitions/*.ts"
+    ],
+    "cucumberautocomplete.syncfeatures": "features/*.feature"
+}
