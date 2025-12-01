@@ -65,8 +65,8 @@ Then("I should see the url includes {string} coordinates", async (coords: string
     assert.strictEqual(coordinates, coords, `The url ${url} contains the coordinates ${coords}`);
 });
 
-// I save the all routes to a text file "directions.txt"
-Then("I save the all routes to a text file {string}", async (fileName: string) => {
+// I save all routes to a text file "directions.txt"
+Then("I save all routes to a text file {string}", async (fileName: string) => {
     log.info(`Saving routes to file: ${fileName}`);
     const modesAttr = page.locator('span[class="Os0QJc google-symbols"]')
     await expect(modesAttr.first()).toBeVisible();

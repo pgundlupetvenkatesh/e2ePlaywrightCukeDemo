@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 417676
+              "duration": 1335141
             }
           },
           {
@@ -27,7 +27,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1213310938
+              "duration": 1394181557
             }
           },
           {
@@ -40,7 +40,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 84459150
+              "duration": 98606537
             }
           },
           {
@@ -53,7 +53,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1918305019
+              "duration": 1889626527
             }
           },
           {
@@ -61,7 +61,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 320302
+              "duration": 393141
             }
           }
         ],
@@ -85,7 +85,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 287368
+              "duration": 1706972
             }
           },
           {
@@ -98,7 +98,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 67405300
+              "duration": 191771698
             }
           },
           {
@@ -111,7 +111,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 259224170
+              "duration": 137097842
             }
           },
           {
@@ -124,20 +124,20 @@
             },
             "result": {
               "status": "passed",
-              "duration": 609711961
+              "duration": 602743067
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 14,
-            "name": "I save the all routes to a text file \"directions.txt\"",
+            "name": "I save all routes to a text file \"directions.txt\"",
             "match": {
               "location": "file:/Users/pratikgv/git/e2ePlaywrightCukeDemo/features/step_definitions/generic_steps.ts:69"
             },
             "result": {
               "status": "passed",
-              "duration": 786833725
+              "duration": 655376576
             }
           },
           {
@@ -145,7 +145,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 212960
+              "duration": 162037
             }
           }
         ],
