@@ -5,9 +5,14 @@ As a User, I want to interact with Google Maps so that I can explore locations a
   Background:
     Given I navigate to Google maps
 
-  Scenario: Search for a location on Google Maps
-    When I enter 'Chico CA' as source
-    Then I should see 'Chico' on the side panel
+  Scenario Outline: Search for a location on Google Maps
+    When I enter '<source>' as source
+    Then I should see '<location>' on the side panel
+
+    Examples:
+      | source      | location      |
+      | San Jose CA | San Jose      |
+      | Chico CA    | Chico         |
 
   Scenario: Get directions from one location to another
     When I enter 'Sacramento CA' as source
