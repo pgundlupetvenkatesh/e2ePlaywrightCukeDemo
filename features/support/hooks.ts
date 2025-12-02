@@ -58,6 +58,7 @@ AfterAll(async function () {
     log.info("Closing browser...");
     if (browser) {
         try {
+            await context.close();
             await browser.close();
             log.info("Browser closed successfully");
         } catch (error) {
