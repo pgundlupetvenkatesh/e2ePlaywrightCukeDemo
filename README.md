@@ -1,5 +1,8 @@
 # e2ePlaywrightCukeDemo
-This demo was built and tested in `iOS Mac Pro` so all below installers and dependencies related to that.
+
+[![Playwright Tests](https://github.com/pgundlupetvenkatesh/e2ePlaywrightCukeDemo/actions/workflows/playwright.yml/badge.svg)](https://github.com/pgundlupetvenkatesh/e2ePlaywrightCukeDemo/actions/workflows/playwright.yml)
+
+This demo is built and tested in `iOS Macbook Pro` so all below installers and dependencies related to that.
 
 ### Dependencies
 * Install Playwright Test for VSCode
@@ -15,11 +18,16 @@ Press `command` + `,` to open Settings and search for `cucumber`. Edit `settings
 "tests/**/*.feature",
 "*specs*/**/*.feature"
 ```
-## Running Test
-Run `npm test -- --tags @google-map` command in the terminal to kick the Cucumber feature test. 
+
+## Running Test Locally
+1. Clone the repo
+2. Be on the root directory and run `npm test -- --tags @google-map` command in the terminal to kick the Cucumber feature test.
+3. After test execution completes, open `cucumber-report.html` from the root directory to see the results
+4. Verify test output in `features/support/output/directions.txt`
 
 ## Testing
-All routes data will be saved in `features/support/output/routes.txt` file.
+All routes data will be saved in `features/support/output/directions.txt` file.
+Want to run test headless? Add `HEADLESS=true` before the above test command.
 
 ## Report
 `cucumber-report.html` file gets created in project home directory

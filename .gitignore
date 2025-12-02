@@ -148,8 +148,9 @@ vite.config.ts.timestamp-*
 # output file
 /features/support/output/directions.txt
 
-# Cucumber HTML report
+# Cucumber report
 cucumber-report.html
+cucumber-report.json
 
 # Ignore screenshots
 /screenshots/
