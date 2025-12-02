@@ -1,20 +1,20 @@
 [
   {
-    "description": "As a User, I want to interact with Google Maps so that I can explore locations and get directions.",
+    "description": "As a User, I want to access Google Maps.",
     "elements": [
       {
         "description": "",
-        "id": "google-maps-demo;search-for-a-location-on-google-maps",
+        "id": "access-google-maps-page;access-google-maps-page",
         "keyword": "Scenario",
         "line": 5,
-        "name": "Search for a location on Google Maps",
+        "name": "Access Google Maps Page",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 1335141
+              "duration": 445760
             }
           },
           {
@@ -27,33 +27,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1394181557
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 7,
-            "name": "I enter 'Sacramento CA' as source",
-            "match": {
-              "location": "file:/Users/pratikgv/git/e2ePlaywrightCukeDemo/features/step_definitions/generic_steps.ts:25"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 98606537
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 8,
-            "name": "I should see 'Sacramento' on the side panel",
-            "match": {
-              "location": "file:/Users/pratikgv/git/e2ePlaywrightCukeDemo/features/step_definitions/generic_steps.ts:35"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 1889626527
+              "duration": 1052489324
             }
           },
           {
@@ -61,113 +35,29 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 393141
+              "duration": 256390
             }
           }
         ],
         "tags": [
           {
-            "name": "@google-map",
-            "line": 1
-          }
-        ],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "google-maps-demo;get-directions-from-one-location-to-another",
-        "keyword": "Scenario",
-        "line": 10,
-        "name": "Get directions from one location to another",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 1706972
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 11,
-            "name": "I click the 'Directions' button",
-            "match": {
-              "location": "file:/Users/pratikgv/git/e2ePlaywrightCukeDemo/features/step_definitions/generic_steps.ts:42"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 191771698
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 12,
-            "name": "I enter \"San Francisco CA\" as destination",
-            "match": {
-              "location": "file:/Users/pratikgv/git/e2ePlaywrightCukeDemo/features/step_definitions/generic_steps.ts:49"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 137097842
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 13,
-            "name": "I should see the url includes \"38.5619118,-121.6265496\" coordinates",
-            "match": {
-              "location": "file:/Users/pratikgv/git/e2ePlaywrightCukeDemo/features/step_definitions/generic_steps.ts:58"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 602743067
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 14,
-            "name": "I save all routes to a text file \"directions.txt\"",
-            "match": {
-              "location": "file:/Users/pratikgv/git/e2ePlaywrightCukeDemo/features/step_definitions/generic_steps.ts:69"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 655376576
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 162037
-            }
-          }
-        ],
-        "tags": [
-          {
-            "name": "@google-map",
+            "name": "@tirekick",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "google-maps-demo",
+    "id": "access-google-maps-page",
     "line": 2,
     "keyword": "Feature",
-    "name": "Google Maps Demo",
+    "name": "Access Google Maps Page",
     "tags": [
       {
-        "name": "@google-map",
+        "name": "@tirekick",
         "line": 1
       }
     ],
-    "uri": "features/google_maps_demo.feature"
+    "uri": "features/tirekick.feature"
   }
 ]

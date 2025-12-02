@@ -1,28 +1,30 @@
 import { After, AfterAll, Before, Status, setDefaultTimeout, BeforeAll } from "@cucumber/cucumber";
 import { chromium } from "@playwright/test";
-import type { Browser, Page } from "@playwright/test";
+import type { Browser, Page, BrowserContext } from "@playwright/test";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { log } from './helpers/logger.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const headlessMode: boolean = process.env.HEADLESS === 'true' ? true : false;
 
 setDefaultTimeout(30 * 1000);
 
 let browser: Browser
 let page: Page;
+let context: BrowserContext;
 
 BeforeAll(async function () {
     log.silly("Setting up browser...");
     try {
         browser = await chromium.launch({ 
-            headless: false,
+            headless: headlessMode,
             args: ['--start-maximized']
         });
         log.info("Browser launched successfully");
         
-        const context = await browser.newContext({
+        context = await browser.newContext({
             colorScheme: 'dark',
             acceptDownloads: true,
             locale: 'en-US',
