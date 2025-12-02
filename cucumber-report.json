@@ -1,0 +1,63 @@
+[
+  {
+    "description": "As a User, I want to access Google Maps.",
+    "elements": [
+      {
+        "description": "",
+        "id": "access-google-maps-page;access-google-maps-page",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Access Google Maps Page",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 445760
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "I navigate to Google maps",
+            "match": {
+              "location": "file:/Users/pratikgv/git/e2ePlaywrightCukeDemo/features/step_definitions/generic_steps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1052489324
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 256390
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@tirekick",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "access-google-maps-page",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Access Google Maps Page",
+    "tags": [
+      {
+        "name": "@tirekick",
+        "line": 1
+      }
+    ],
+    "uri": "features/tirekick.feature"
+  }
+]

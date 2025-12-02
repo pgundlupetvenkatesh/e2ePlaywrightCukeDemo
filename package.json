@@ -1,0 +1,30 @@
+{
+  "name": "e2eplaywrightcukedemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pgundlupetvenkatesh/e2ePlaywrightCukeDemo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/pgundlupetvenkatesh/e2ePlaywrightCukeDemo/issues"
+  },
+  "homepage": "https://github.com/pgundlupetvenkatesh/e2ePlaywrightCukeDemo#readme",
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.2.0",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "tslog": "^4.10.2"
+  }
+}
