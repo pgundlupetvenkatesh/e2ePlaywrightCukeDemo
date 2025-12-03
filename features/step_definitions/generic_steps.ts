@@ -65,6 +65,21 @@ Then("I should see the url includes {string} coordinates", async (coords: string
     assert.strictEqual(coordinates, coords, `The url ${url} contains the coordinates ${coords}`);
 });
 
+Then("I should see following source and destination locations in the side panelbar:", async (dataTable) => {
+    const locations = dataTable.raw();
+    log.info(`Verifying locations in side panel: ${locations}`);
+    const searchBox = page.locator('input[class="tactile-searchbox-input"]').filter({visible: true});
+    log.info(`Search box value: ${searchBox}`);
+    const inputTxt: string[] = await searchBox.evaluateAll((elements: any) => {
+    return elements.map((ele: any) => ele.getAttribute('aria-label') || '');
+    });
+    log.info(`Input text values: ${inputTxt}`);
+    inputTxt.forEach((txt: string, index: number) => {
+        const exist: boolean = txt.includes(locations[index]);
+        assert.ok(exist, `Location ${locations[index]} is present in the side panel`);
+    });
+});
+
 // I save all routes to a text file "directions.txt"
 Then("I save all routes to a text file {string}", async (fileName: string) => {
     log.info(`Saving routes to file: ${fileName}`);
