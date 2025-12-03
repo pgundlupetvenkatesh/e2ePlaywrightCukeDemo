@@ -51,7 +51,8 @@ Before(async function (scenario) {
 });
 
 After(async function (scenario) {
-    log.info(`Completed scenario: ${scenario.pickle.name}`);
+    let tags = scenario.pickle.tags.map(tag => tag.name).join(", ");
+    log.info(`Scenario: '${scenario.pickle.name}' with tags: ${tags} ${scenario.result?.status} and had ${scenario.pickle.steps.length} steps.`);
 });
 
 AfterAll(async function () {

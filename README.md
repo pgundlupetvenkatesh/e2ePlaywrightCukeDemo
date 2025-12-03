@@ -25,6 +25,9 @@ Press `command` + `,` to open Settings and search for `cucumber`. Edit `settings
 3. After test execution completes, open `cucumber-report.html` from the root directory to see the results
 4. Verify test output in `features/support/output/directions.txt`
 
+### Dry-Run Test
+Run `npx cucumber-js --dry-run` to do a quick dry-run test to validate all steps in the feature files have their corresponding step defs defined.
+
 ## Testing
 All routes data will be saved in `features/support/output/directions.txt` file.
 Want to run test headless? Add `HEADLESS=true` before the above test command.
