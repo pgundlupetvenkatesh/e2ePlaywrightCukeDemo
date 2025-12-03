@@ -29,6 +29,9 @@ Press `command` + `,` to open Settings and search for `cucumber`. Edit `settings
 All routes data will be saved in `features/support/output/directions.txt` file.
 Want to run test headless? Add `HEADLESS=true` before the above test command.
 
+## Troubleshooting
+For verbose API logging, Run test command with `DEBUG=pw:api` and for even more detailed logging including network traffic, run `DEBUG=*`
+
 ## Report
 `cucumber-report.html` file gets created in project home directory
 ![alt text](image.png)
