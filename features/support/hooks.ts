@@ -47,6 +47,7 @@ BeforeAll(async function () {
 });
 
 Before(async function (scenario) {
+    await context.clearCookies();
     log.info(`Starting scenario: ${scenario.pickle.name}`);
 });
 
