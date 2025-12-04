@@ -18,7 +18,6 @@ export const launchBrowser = async (browserType?: string) => {
         default:
             throw new Error("Please set the a browser to launch")
     }
-
 }
 
 export const setContext = (browser: Browser) => {
