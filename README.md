@@ -37,7 +37,7 @@ For verbose API logging, Run test command with `DEBUG=pw:api` and for even more 
 
 ## Report
 `cucumber-report.html` file gets created in project home directory
-![alt text](image.png)
+![alt text](image-1.png)
 
 ## ToDo
 1. Browser context(desired capabilities)
