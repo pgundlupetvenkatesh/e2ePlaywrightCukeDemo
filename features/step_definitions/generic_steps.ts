@@ -5,9 +5,12 @@ import fs from 'fs'; // Node.js File System module
 import path from 'path';
 import { getPage, getlog } from '../support/hooks.ts';
 import * as helperUtils from '../support/helpers/helper.ts';
+import { Common } from '../../pages/common.ts';
 
 // Get __dirname for CommonJS environment
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+const obj = new Common();
 
 setDefaultTimeout(30 * 1000);
 let page: any;
@@ -24,7 +27,7 @@ Given("I navigate to Google maps", async () => {
 // I enter 'Sacramento CA' as source
 When("I enter {string} as source", async (srcCity: string) => {
     log.info(`Entering source city: ${srcCity}`);
-    const srchBox = page.locator('#searchboxinput');
+    const srchBox = page.locator(obj.srchBox);
     await expect(srchBox).toBeVisible();
     await srchBox.fill(srcCity);
     await page.keyboard.press('Enter');
@@ -47,7 +50,7 @@ When("I click the {string} button", async (btnName: string) => {
 
 // I enter "San Francisco CA" as destination
 When("I enter {string} as destination", async (destCity: string) => {
-    const txtField = page.getByPlaceholder('Choose starting point, or click on the map...');
+    const txtField = await page.getByPlaceholder(obj.destTxtFieldPlaceholder);
     await expect(txtField).toBeVisible();
     await txtField.fill(destCity);
 
@@ -68,7 +71,7 @@ Then("I should see the url includes {string} coordinates", async (coords: string
 Then("I should see following source and destination locations in the side panelbar:", async (dataTable) => {
     const locations = dataTable.raw();
     log.info(`Verifying locations in side panel: ${locations}`);
-    const searchBox = page.locator('input[class="tactile-searchbox-input"]').filter({visible: true});
+    const searchBox = page.locator(obj.srcDestSidePanel).filter({visible: true});
     log.info(`Search box value: ${searchBox}`);
     const inputTxt: string[] = await searchBox.evaluateAll((elements: any) => {
     return elements.map((ele: any) => ele.getAttribute('aria-label') || '');
@@ -83,14 +86,14 @@ Then("I should see following source and destination locations in the side panelb
 // I save all routes to a text file "directions.txt"
 Then("I save all routes to a text file {string}", async (fileName: string) => {
     log.info(`Saving routes to file: ${fileName}`);
-    const modesAttr = page.locator('span[class="Os0QJc google-symbols"]')
+    const modesAttr = page.locator(obj.trvlModes)
     await expect(modesAttr.first()).toBeVisible();
     const dirModes: string[] = await modesAttr.evaluateAll((elements: any) => {
     return elements.map((ele: any) => ele.getAttribute('aria-label') || '');
     });
-    const dirTitles = page.locator('h1[id^="section-directions-trip-title-"]')
-    const timeDivs = page.locator('div[class^="Fk3sm fontHeadlineSmall"]')
-    const milesDivs = page.locator('div[class="ivN21e tUEI8e fontBodyMedium"]')
+    const dirTitles = page.locator(obj.tripTitles)
+    const timeDivs = page.locator(obj.tripTimes)
+    const milesDivs = page.locator(obj.tripMiles)
     await expect(dirTitles.first()).toBeVisible();
 
     const h1s = await dirTitles.all();
