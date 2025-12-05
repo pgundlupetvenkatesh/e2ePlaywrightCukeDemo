@@ -18,7 +18,9 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: HEADLESS=true npx cucumber-js --tags @tirekick
+      run: |
+        npx cucumber-js --dry-run
+        HEADLESS=true npx cucumber-js --tags @tirekick
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
