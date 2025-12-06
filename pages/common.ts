@@ -1,4 +1,8 @@
+import type { Page } from "@playwright/test";
+import { expect } from "@playwright/test";
+
 export class Common {
+    private readonly page: Page
     srchBox = '#searchboxinput';
     destTxtFieldPlaceholder = 'Choose starting point, or click on the map...';
     srcDestSidePanel = "div[id='section-directions-trip-details-msg-0']";
@@ -6,4 +10,14 @@ export class Common {
     tripTitles = "h1[id^='section-directions-trip-title-']";
     tripTimes = "div[class^='Fk3sm fontHeadlineSmall']";
     tripMiles = "div[class='ivN21e tUEI8e fontBodyMedium']";
+
+    constructor(page: Page) {
+        this.page = page;
+    }
+
+    public async fillIn(val: string, field: any) {
+        await expect(field).toBeVisible();
+        await field.fill(val);
+        await this.page.keyboard.press('Enter');
+    }
 };

@@ -10,15 +10,15 @@ import { Common } from '../../pages/common.ts';
 // Get __dirname for CommonJS environment
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const obj = new Common();
-
 setDefaultTimeout(30 * 1000);
 let page: any;
 let log = getlog();
+let obj: Common;
 
 Given("I navigate to Google maps", async () => {
     log.info("I navigate to Google maps step def...")
     page = getPage();
+    obj = new Common(page);
     await page.goto("https://maps.google.com/");
     await expect(page).toHaveTitle(/Google Maps/);
     log.info("Navigated to Google Maps");
@@ -28,9 +28,7 @@ Given("I navigate to Google maps", async () => {
 When("I enter {string} as source", async (srcCity: string) => {
     log.info(`Entering source city: ${srcCity}`);
     const srchBox = page.locator(obj.srchBox);
-    await expect(srchBox).toBeVisible();
-    await srchBox.fill(srcCity);
-    await page.keyboard.press('Enter');
+    await obj.fillIn(srcCity, srchBox);
     log.info(`Searched for ${srcCity}`);
 });
 
@@ -51,10 +49,7 @@ When("I click the {string} button", async (btnName: string) => {
 // I enter "San Francisco CA" as destination
 When("I enter {string} as destination", async (destCity: string) => {
     const txtField = await page.getByPlaceholder(obj.destTxtFieldPlaceholder);
-    await expect(txtField).toBeVisible();
-    await txtField.fill(destCity);
-
-    await page.keyboard.press('Enter');
+    await obj.fillIn(destCity, txtField);
 });
 
 // I should see the url includes "38.171651,-122.6790579" coordinates
