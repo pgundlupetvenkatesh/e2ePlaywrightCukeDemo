@@ -49,8 +49,21 @@ When("I enter {string} as destination", async (destCity: string) => {
 
 // I should see the url includes "38.171651,-122.6790579" coordinates
 Then("I should see the url includes {string} coordinates", async (coords: string) => {
-    await page.waitForURL(helperUtils.regex);
-    await page.waitForURL(new RegExp(`${coords}`));
+    try {
+        await page.waitForURL(helperUtils.regex);
+        log.info("URL matches coordinate regex pattern");
+    } catch (error) {
+        log.error(`URL does not match expected coordinate regex pattern: ${helperUtils.regex}`);
+        throw error; // Re-throw to fail the test
+    }
+
+    try {
+        await page.waitForURL(new RegExp(`${coords}`));
+        log.info(`URL contains expected coordinates: ${coords}`);
+    } catch (error) {
+        log.error(`URL does not contain expected coordinates: ${coords}`);
+        throw error; // Re-throw to fail the test
+    }
 
     let url: string = page.url();
     const coordinates = await helperUtils.extractCoordinatesFromURL(url);
