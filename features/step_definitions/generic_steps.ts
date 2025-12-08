@@ -1,14 +1,9 @@
 import assert, { Assert } from 'assert';
 import { Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
 import { expect } from "@playwright/test";
-import fs from 'fs'; // Node.js File System module
-import path from 'path';
 import { getPage, getlog } from '../support/hooks.ts';
 import * as helperUtils from '../support/helpers/helper.ts';
 import { Common } from '../../pages/common.ts';
-
-// Get __dirname for CommonJS environment
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 setDefaultTimeout(30 * 1000);
 let page: any;
@@ -68,9 +63,7 @@ Then("I should see following source and destination locations in the side panelb
     log.info(`Verifying locations in side panel: ${locations}`);
     const searchBox = page.locator(obj.srcDestSidePanel).filter({visible: true});
     log.info(`Search box value: ${searchBox}`);
-    const inputTxt: string[] = await searchBox.evaluateAll((elements: any) => {
-    return elements.map((ele: any) => ele.getAttribute('aria-label') || '');
-    });
+    const inputTxt: string[] = await obj.getValsByEleAttr(searchBox);
     log.info(`Input text values: ${inputTxt}`);
     inputTxt.forEach((txt: string, index: number) => {
         const exist: boolean = txt.includes(locations[index]);
@@ -83,9 +76,7 @@ Then("I save all routes to a text file {string}", async (fileName: string) => {
     log.info(`Saving routes to file: ${fileName}`);
     const modesAttr = page.locator(obj.trvlModes)
     await expect(modesAttr.first()).toBeVisible();
-    const dirModes: string[] = await modesAttr.evaluateAll((elements: any) => {
-    return elements.map((ele: any) => ele.getAttribute('aria-label') || '');
-    });
+    const dirModes: string[] = await obj.getValsByEleAttr(modesAttr);
     const dirTitles = page.locator(obj.tripTitles)
     const timeDivs = page.locator(obj.tripTimes)
     const milesDivs = page.locator(obj.tripMiles)
@@ -110,18 +101,8 @@ Then("I save all routes to a text file {string}", async (fileName: string) => {
     }
     log.debug(`Route from routes: ${routes}`);
 
-    //Write to file and read content to verify
-    const opFile = path.join(__dirname, `../support/output/${fileName}`);
     const content = routes.join('\n---\n')
-    try {
-        fs.writeFileSync(opFile, content, 'utf-8');
-        log.info(`Routes saved to ${opFile}`);
-    } catch (err) {
-        log.error(`Error writing to file: ${err}`);
-    }
-    const fileContent = fs.readFileSync(opFile, 'utf-8');
+    const fileContent = await obj.writeToFile(fileName, content);
     // expect(fileContent).toBe(content);
     assert.strictEqual(fileContent, content, 'File content matches the routes content');
-
-    log.silly(`Routes saved to file: ${opFile}`);
 });
