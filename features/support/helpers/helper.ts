@@ -1,3 +1,5 @@
+import path from 'path';
+import fs from 'fs';
 import { getlog } from '../hooks.ts';
 
 let log = getlog();
@@ -19,4 +21,19 @@ export const extractCoordinatesFromURL = async (url: string): Promise<string | n
     }
 
     return null;
+}
+
+//Write to file and read content to verify
+export async function writeToFile(fileName: string, data: string) {
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
+    const opFile = path.join(__dirname, `../output/${fileName}`);
+
+    try {
+        fs.writeFileSync(opFile, data, 'utf-8');
+        log.silly(`Routes saved to ${opFile}`);
+    } catch (err) {
+        log.error(`Error writing to file: ${err}`);
+    }
+
+    return fs.readFileSync(opFile, 'utf-8');
 }
