@@ -1,11 +1,11 @@
 import assert, { Assert } from 'assert';
 import { Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
 import { expect } from "@playwright/test";
-import { getPage, getlog } from '../support/hooks.ts';
+import { getPage, getlog, DEFAULT_TIMEOUT } from '../support/hooks.ts';
 import * as helperUtils from '../support/helpers/helper.ts';
 import { Common } from '../../pages/common.ts';
 
-setDefaultTimeout(30 * 1000);
+setDefaultTimeout(DEFAULT_TIMEOUT);
 let page: any;
 let log = getlog();
 let obj: Common;
@@ -50,6 +50,7 @@ When("I enter {string} as destination", async (destCity: string) => {
 // I should see the url includes "38.171651,-122.6790579" coordinates
 Then("I should see the url includes {string} coordinates", async (coords: string) => {
     try {
+        await page.pause();
         await page.waitForURL(helperUtils.regex);
         log.info("URL matches coordinate regex pattern");
     } catch (error) {

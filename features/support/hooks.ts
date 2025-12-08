@@ -8,7 +8,11 @@ import { log } from './helpers/logger.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-setDefaultTimeout(30 * 1000);
+// Set timeout based on environment - longer for debugging
+const isDebugMode = process.env.DEBUG === 'true' || process.env.PWDEBUG === '1';
+export const DEFAULT_TIMEOUT = isDebugMode ? 300 * 1000 : 30 * 1000;
+log.info(`Debug mode: ${isDebugMode}, Timeout set to: ${DEFAULT_TIMEOUT}ms`);
+setDefaultTimeout(DEFAULT_TIMEOUT);
 
 let browser: Browser
 let page: Page;
@@ -22,6 +26,12 @@ BeforeAll(async function () {
         
         log.info(`browser Type: ${browser.browserType().name()}`);
         context = await setContext(browser);
+        
+        // Set longer timeouts for debugging
+        if (isDebugMode) {
+            context.setDefaultTimeout(300 * 1000); // 5 minutes for Playwright actions
+            context.setDefaultNavigationTimeout(300 * 1000);
+        }
         
         page = await context.newPage();
         log.info("Page created successfully");
