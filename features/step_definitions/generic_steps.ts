@@ -1,11 +1,11 @@
 import assert, { Assert } from 'assert';
 import { Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
 import { expect } from "@playwright/test";
-import { getPage, getlog } from '../support/hooks.ts';
+import { getPage, getlog, DEFAULT_TIMEOUT } from '../support/hooks.ts';
 import * as helperUtils from '../support/helpers/helper.ts';
 import { Common } from '../../pages/common.ts';
 
-setDefaultTimeout(30 * 1000);
+setDefaultTimeout(DEFAULT_TIMEOUT);
 let page: any;
 let log = getlog();
 let obj: Common;
