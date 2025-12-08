@@ -19,7 +19,7 @@ As a User, I want to interact with Google Maps so that I can explore locations a
     Then I should see 'Sacramento' on the side panel
     And I click the 'Directions' button
     And I enter "San Francisco CA" as destination
-    Then I should see the url includes "38.1727316,-122.6598938" coordinates
+    Then I should see the url includes "38.1779576,-122.6789672" coordinates
     And I should see following source and destination locations in the side panelbar:
       | San Francisco |
       | Sacramento    |

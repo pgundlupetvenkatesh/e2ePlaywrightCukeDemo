@@ -20,10 +20,13 @@ jobs:
     - name: Run Playwright tests
       run: |
         npx cucumber-js --dry-run
-        HEADLESS=true npx cucumber-js --tags @tirekick
+        HEADLESS=true npx cucumber-js -t @tirekick
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
-        name: playwright-report
-        path: playwright-report/
+        name: cucumber-reports
+        path: |
+          cucumber-report.html
+          cucumber-report.json
+          features/support/screenshots/
         retention-days: 30
