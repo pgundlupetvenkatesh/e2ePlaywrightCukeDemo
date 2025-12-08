@@ -50,7 +50,6 @@ When("I enter {string} as destination", async (destCity: string) => {
 // I should see the url includes "38.171651,-122.6790579" coordinates
 Then("I should see the url includes {string} coordinates", async (coords: string) => {
     try {
-        await page.pause();
         await page.waitForURL(helperUtils.regex);
         log.info("URL matches coordinate regex pattern");
     } catch (error) {
