@@ -46,6 +46,29 @@ Before(async function (scenario) {
 After(async function (scenario) {
     let tags = scenario.pickle.tags.map(tag => tag.name).join(", ");
     log.info(`Scenario: '${scenario.pickle.name}' with tags: ${tags} ${scenario.result?.status} and had ${scenario.pickle.steps.length} steps.`);
+
+    if (scenario.result?.status === Status.FAILED) {
+        try {
+            if (page) {
+                const screenshotDir = path.join(__dirname, "./screenshots");
+                fs.mkdirSync(screenshotDir, { recursive: true });
+                
+                const screenshotPath = path.join(screenshotDir, `${scenario.pickle.name}-${Date.now()}.png`);
+                // Screenshot of full page content
+                await page.screenshot({ path: screenshotPath, fullPage: true });
+		        const imageBuffer = fs.readFileSync(screenshotPath);
+                this.attach(imageBuffer, "image/png");
+                log.info(`Screenshot saved: ${screenshotPath}`);
+
+                // Log current URL for debugging
+                const currentUrl = page.url();
+                log.warn(`Failed at URL: ${currentUrl}`);
+            }
+        } catch (error) {
+            log.error(`Error taking screenshot: ${error}`);
+        }
+    }
+
 });
 
 AfterAll(async function () {

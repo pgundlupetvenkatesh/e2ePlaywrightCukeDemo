@@ -152,5 +152,5 @@ vite.config.ts.timestamp-*
 cucumber-report.html
 cucumber-report.json
 
-# Ignore screenshots
-/screenshots/
+# Ignore entire screenshots directory and all contents
+screenshots/
