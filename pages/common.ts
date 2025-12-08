@@ -1,8 +1,5 @@
 import type { Page, Locator } from "@playwright/test";
 import { expect } from "@playwright/test";
-import fs from 'fs'; // Node.js File System module
-import path from 'path';
-import { log } from '../features/support/helpers/logger.ts';
 
 export class Common {
     private readonly page: Page
@@ -30,20 +27,5 @@ export class Common {
         }, attr);
         
         return values;
-    }
-
-    //Write to file and read content to verify
-    async writeToFile(fileName: string, data: string) {
-        const __dirname = path.dirname(new URL(import.meta.url).pathname);
-        const opFile = path.join(__dirname, `../features/support/output/${fileName}`);
-
-        try {
-            fs.writeFileSync(opFile, data, 'utf-8');
-            log.silly(`Routes saved to ${opFile}`);
-        } catch (err) {
-            log.error(`Error writing to file: ${err}`);
-        }
-
-        return fs.readFileSync(opFile, 'utf-8');
     }
 };

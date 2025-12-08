@@ -115,7 +115,7 @@ Then("I save all routes to a text file {string}", async (fileName: string) => {
     log.debug(`Route from routes: ${routes}`);
 
     const content = routes.join('\n---\n')
-    const fileContent = await obj.writeToFile(fileName, content);
+    const fileContent = await helperUtils.writeToFile(fileName, content);
     // expect(fileContent).toBe(content);
     assert.strictEqual(fileContent, content, 'File content matches the routes content');
 });
