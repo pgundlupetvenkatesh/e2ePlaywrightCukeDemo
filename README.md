@@ -44,16 +44,16 @@ A modern end-to-end testing framework built with **Playwright** + **Cucumber.js*
 ### Local Development
 ```bash
 # Run Google Maps tests
-npm test -- --tags @google-map
+npm test -- -t @google-map
 
 # Run specific feature tests
-npm test -- --tags @tirekick
+npm test -- -t @tirekick
 
 # Run in headless mode
-HEADLESS=true npm test -- --tags @google-map
+HEADLESS=true npm test -- -t @google-map
 
 # Run with specific browser, defaults to Chromium
-BROWSER=firefox npm test -- --tags @google-map
+BROWSER=firefox npm test -- -t @google-map
 ```
 
 ### Dry Run (Validation Only)
@@ -62,16 +62,16 @@ BROWSER=firefox npm test -- --tags @google-map
 npx cucumber-js --dry-run
 
 # Validate specific tags
-HEADLESS=true npx cucumber-js --dry-run --tags @tirekick
+HEADLESS=true npx cucumber-js --dry-run -t @tirekick
 ```
 
 ### Debug Mode
 ```bash
 # Verbose Playwright API logging
-DEBUG=pw:api npm test -- --tags @google-map
+DEBUG=pw:api npm test -- -t @google-map
 
 # Full debug logging (including network)
-DEBUG=* npm test -- --tags @google-map
+DEBUG=* npm test -- -t @google-map
 ```
 
 ## 📁 Project Structure
@@ -113,7 +113,7 @@ BROWSER=webkit    # Safari
 
 ### Headless Mode
 ```bash
-HEADLESS=true npm test -- --tags @google-map
+HEADLESS=true npm test -- -t @google-map
 ```
 
 ## 📊 Test Results

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test"
+    "test": "cucumber-js test",
+    "_comment": "To run below tag: npm run test:tirekick",
+    "test:tirekick": "cucumber-js -t @tirekick"
   },
   "repository": {
     "type": "git",

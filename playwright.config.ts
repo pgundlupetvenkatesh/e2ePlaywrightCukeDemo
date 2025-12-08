@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-import * as path from 'path';
 
 // Define a directory for all downloads
 // const DOWNLOADS_DIR = path.join(__dirname, 'features/support/downloads');
