@@ -69,7 +69,7 @@ After(async function (scenario) {
 		        const imageBuffer = fs.readFileSync(screenshotPath);
                 this.attach(imageBuffer, "image/png");
                 log.info(`Screenshot saved: ${screenshotPath}`);
-
+                log.info(`Cucumber world parameters: ${JSON.stringify(this.parameters)}`);
                 // Log current URL for debugging
                 const currentUrl = page.url();
                 log.warn(`Failed at URL: ${currentUrl}`);

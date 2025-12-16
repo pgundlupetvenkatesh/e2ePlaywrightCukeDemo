@@ -1,6 +1,10 @@
 {
     "default": {
         "publishQuiet": true,
+        "worldParameters": {
+            "environment": "staging",
+            "baseUrl": "https://maps.google.com/"
+        },
         "dryRun": false,
         "paths": [
             "features/"

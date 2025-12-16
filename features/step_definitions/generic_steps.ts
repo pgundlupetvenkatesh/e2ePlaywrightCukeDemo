@@ -10,11 +10,12 @@ let page: any;
 let log = getlog();
 let obj: Common;
 
-Given("I navigate to Google maps", async () => {
+Given("I navigate to Google maps", async function () {
     log.info("I navigate to Google maps step def...")
     page = getPage();
     obj = new Common(page);
-    await page.goto("https://maps.google.com/");
+    const baseUrl = this.parameters.baseUrl;
+    await page.goto(baseUrl);
     await expect(page).toHaveTitle(/Google Maps/);
     log.info("Navigated to Google Maps");
 });
