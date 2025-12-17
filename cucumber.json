@@ -3,7 +3,8 @@
         "publishQuiet": true,
         "worldParameters": {
             "environment": "staging",
-            "baseUrl": "https://maps.google.com/"
+            "baseUrl": "https://maps.google.com/",
+            "screenshotsOnFailure": true
         },
         "dryRun": false,
         "paths": [
