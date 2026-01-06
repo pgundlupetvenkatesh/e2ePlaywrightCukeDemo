@@ -120,6 +120,7 @@ HEADLESS=true npm test -- -t @google-map
 
 ### HTML Report
 After test execution, open `cucumber-report.html` in your browser for detailed results with screenshots.
+![alt text](image-1.png)
 
 ### Test Output
 - **Routes data**: Saved to `features/support/output/directions.txt`
