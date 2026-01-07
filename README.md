@@ -124,6 +124,7 @@ After test execution, open `cucumber-report.html` in your browser for detailed r
 
 ### Test Output
 - **Routes data**: Saved to `features/support/output/directions.txt`
+![alt text](directions.png)
 - **Screenshots**: Automatically captured on failures in `features/support/screenshots/`
 - **Downloads**: Handled automatically in `features/support/downloads/`
 
