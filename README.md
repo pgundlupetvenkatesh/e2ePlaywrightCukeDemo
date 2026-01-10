@@ -46,6 +46,9 @@ A modern end-to-end testing framework built with **Playwright** + **Cucumber.js*
 # Run Google Maps tests
 npm test -- -t @google-map
 
+# Run Google Maps test and view Allure Report
+npm run test:report
+
 # Run specific feature tests
 npm test -- -t @tirekick
 

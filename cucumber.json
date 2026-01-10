@@ -16,7 +16,8 @@
             "features/step_definitions/*.ts"
         ],
         "formatOptions": {
-            "snippetInterface": "async-await"
+            "snippetInterface": "async-await",
+            "resultsDir": "./allure-results"
         },
         "requireModule": ["ts-node/esm"],
         "format": [
@@ -26,7 +27,8 @@
             ],
             "summary",
             "progress-bar",
-            "json:./cucumber-report.json"
+            "json:./cucumber-report.json",
+            "allure-cucumberjs/reporter"
         ]
     }
 }
