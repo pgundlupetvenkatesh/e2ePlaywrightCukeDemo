@@ -1,4 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"As a User, I want to interact with Google Maps so that I can explore locations and get directions.","2923","Search for a location on Google Maps","","2026-01-10","passed","2026-01-10","","","",""
-"As a User, I want to interact with Google Maps so that I can explore locations and get directions.","4637","Search for a location on Google Maps","","2026-01-10","passed","2026-01-10","","","",""
-"As a User, I want to interact with Google Maps so that I can explore locations and get directions.","6829","Get directions from one location to another","","2026-01-10","passed","2026-01-10","","","",""
