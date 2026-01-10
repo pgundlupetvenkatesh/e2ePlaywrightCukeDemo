@@ -122,6 +122,11 @@ HEADLESS=true npm test -- -t @google-map
 After test execution, open `cucumber-report.html` in your browser for detailed results with screenshots.
 ![alt text](image-1.png)
 
+### Allure Report
+* Install Allure Report [here](https://allurereport.org/docs/v2/install-for-macos/)
+* Install Allure-playwright adapter. `npm install --save-dev @playwright/test allure-playwright`
+
+
 ### Test Output
 - **Routes data**: Saved to `features/support/output/directions.txt`
 ![alt text](directions.png)
@@ -203,14 +208,6 @@ Current test scenarios:
 - ✅ Route calculation and extraction
 - ✅ Location validation
 - ✅ File operations and data persistence
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass locally
-5. Submit a pull request
 
 ## ToDo
 1. Browser context(desired capabilities)

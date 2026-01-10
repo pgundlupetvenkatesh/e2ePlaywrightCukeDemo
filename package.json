@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pretest": "npx playwright install",
     "test": "cucumber-js test",
     "_comment": "To run below tag: npm run test:tirekick",
     "test:tirekick": "cucumber-js -t @tirekick"
@@ -22,8 +23,9 @@
   "homepage": "https://github.com/pgundlupetvenkatesh/e2ePlaywrightCukeDemo#readme",
   "devDependencies": {
     "@cucumber/cucumber": "^12.2.0",
-    "@playwright/test": "^1.56.1",
+    "@playwright/test": "^1.57.0",
     "@types/node": "^24.10.1",
+    "allure-playwright": "^3.4.4",
     "ts-node": "^10.9.2"
   },
   "dependencies": {

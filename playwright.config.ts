@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as os from "node:os";
 
 // Define a directory for all downloads
 // const DOWNLOADS_DIR = path.join(__dirname, 'features/support/downloads');
@@ -25,7 +26,22 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  // reporter: 'html',
+  reporter: [["line"], [
+    "allure-playwright",
+    {
+      detail: true,
+      outputFolder: "allure-results",
+      suiteTitle: true,
+      environmentInfo: {
+          os_platform: os.platform(),
+          os_release: os.release(),
+          os_version: os.version(),
+          node_version: process.version,
+        }
+    }
+  
+  ]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */

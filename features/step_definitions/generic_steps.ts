@@ -23,21 +23,22 @@ Given("I navigate to Google maps", async function () {
 // I enter 'Sacramento CA' as source
 When("I enter {string} as source", async (srcCity: string) => {
     log.info(`Entering source city: ${srcCity}`);
-    const srchBox = page.locator(obj.srchBox);
+    const srchBox = page.getByRole('combobox', { name: obj.srchBox });
     await obj.fillIn(srcCity, srchBox);
     log.info(`Searched for ${srcCity}`);
 });
 
 // I should see 'Sacramento' on the side panel
 Then("I should see {string} on the side panel", async (location: string) => {
-    const loc = page.getByRole('heading').filter({ has: page.getByText(location) })
+    const loc = page.getByRole('heading', { name: location })
     await expect(loc).toBeVisible();
     console.log(`I see '${loc}' on the side panel step def...`);
 });
 
 // I click the 'Directions' button
 When("I click the {string} button", async (btnName: string) => {
-    const btn = page.locator('button', { hasText: btnName });
+    const btn = page.getByRole('button', { name: btnName })
+        .or(page.getByRole('radio', { name: new RegExp(`^${btnName}`) }));
     await expect(btn).toBeVisible();
     await btn.click();
 });
@@ -46,6 +47,9 @@ When("I click the {string} button", async (btnName: string) => {
 When("I enter {string} as destination", async (destCity: string) => {
     const txtField = await page.getByPlaceholder(obj.destTxtFieldPlaceholder);
     await obj.fillIn(destCity, txtField);
+
+    const tripTitls = await page.locator(obj.tripTitles);
+    await expect(tripTitls.first()).toBeVisible();
 });
 
 // I should see the url includes "38.171651,-122.6790579" coordinates
