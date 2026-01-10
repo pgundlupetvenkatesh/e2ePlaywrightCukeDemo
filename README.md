@@ -46,6 +46,9 @@ A modern end-to-end testing framework built with **Playwright** + **Cucumber.js*
 # Run Google Maps tests
 npm test -- -t @google-map
 
+# Run Google Maps test and view Allure Report
+npm run test:report
+
 # Run specific feature tests
 npm test -- -t @tirekick
 
@@ -121,6 +124,11 @@ HEADLESS=true npm test -- -t @google-map
 ### HTML Report
 After test execution, open `cucumber-report.html` in your browser for detailed results with screenshots.
 ![alt text](image-1.png)
+
+### Allure Report
+* Install Allure Report [here](https://allurereport.org/docs/v2/install-for-macos/)
+* Install Allure-playwright adapter. `npm install --save-dev @playwright/test allure-playwright`
+
 
 ### Test Output
 - **Routes data**: Saved to `features/support/output/directions.txt`
@@ -203,14 +211,6 @@ Current test scenarios:
 - ✅ Route calculation and extraction
 - ✅ Location validation
 - ✅ File operations and data persistence
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass locally
-5. Submit a pull request
 
 ## ToDo
 1. Browser context(desired capabilities)

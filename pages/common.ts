@@ -3,7 +3,8 @@ import { expect } from "@playwright/test";
 
 export class Common {
     private readonly page: Page
-    srchBox = '#searchboxinput';
+
+    srchBox = 'Search Google Maps';
     destTxtFieldPlaceholder = 'Choose starting point, or click on the map...';
     srcDestSidePanel = "div[id='section-directions-trip-details-msg-0']";
     trvlModes = "span[class='Os0QJc google-symbols']";
