@@ -64,7 +64,7 @@ BROWSER=firefox npm test -- -t @google-map
 # Validate all feature files and step definitions
 npx cucumber-js --dry-run
 
-# Validate specific tags
+# Validate specific tags(no execution)
 HEADLESS=true npx cucumber-js --dry-run -t @tirekick
 ```
 
