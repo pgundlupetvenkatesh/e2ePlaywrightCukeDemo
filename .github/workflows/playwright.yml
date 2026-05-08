@@ -19,8 +19,8 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: |
-        npx cucumber-js --dry-run
-        HEADLESS=true npx cucumber-js -t @tirekick
+        npx cucumber-js --dry-run --format progress
+        HEADLESS=true npx cucumber-js -t @tirekick --format progress
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

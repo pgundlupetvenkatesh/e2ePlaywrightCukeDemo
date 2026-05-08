@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import type { Locator } from '@playwright/test';
 import { getlog } from '../hooks.ts';
 
 let log = getlog();
@@ -36,4 +37,26 @@ export async function writeToFile(fileName: string, data: string) {
     }
 
     return fs.readFileSync(opFile, 'utf-8');
+}
+
+export const formatToPointOne = (str: any) => {
+    return str.split(',').map((num: string) => num.replace(/(\.\d).*$/, '$1')).join(',');
+}
+
+export const buildRoutesSummary = async (h1s: Locator[], time: Locator[], miles: Locator[], dirModes: string[]): Promise<string[]> => {
+    log.info(`Found ${h1s.length} routes`);
+
+    const routes: string[] = [];
+    for (let i = 0; i < h1s.length; i++) {
+        const mode = i < dirModes.length ? dirModes[i] : 'N/A';
+        const route = await h1s[i].innerText();
+        const timeText = i < time.length ? await time[i].innerText() : 'N/A';
+        const milesText = i < miles.length ? await miles[i].innerText() : 'N/A';
+        
+        const routeInfo = `Mode: ${mode}\nDirections: ${route}\nTime: ${timeText}\nMiles: ${milesText}`;
+        routes.push(routeInfo);
+        log.debug(`Route ${i + 1}: ${route}`);
+    }
+    
+    return routes;
 }

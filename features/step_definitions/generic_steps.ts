@@ -30,16 +30,22 @@ When("I enter {string} as source", async (srcCity: string) => {
 
 // I should see 'Sacramento' on the side panel
 Then("I should see {string} on the side panel", async (location: string) => {
-    const loc = page.getByRole('heading', { name: location })
+    const loc = await page.getByRole('heading', { name: location })
     await expect(loc).toBeVisible();
-    console.log(`I see '${loc}' on the side panel step def...`);
+    log.info(`I see '${loc}' on the side panel step def...`);
 });
 
 // I click the 'Directions' button
-When("I click the {string} button", async (btnName: string) => {
-    const btn = page.getByRole('button', { name: btnName })
-        .or(page.getByRole('radio', { name: new RegExp(`^${btnName}`) }));
+When(/^I click the '(.*)' (radio )?button$/, async (btnName: string, btnType: string) => {
+    log.debug(`Looking for ${btnType ? 'radio' : 'button'} with name: ${btnName}`);
+    const btn = btnType
+        ? page.getByRole('radiogroup').getByRole('radio', { name: new RegExp(`^${btnName}`) })
+        : page.getByRole('button', { name: btnName });
+    
+    log.debug(`${btn} is the button locator object`);
     await expect(btn).toBeVisible();
+    log.debug(`Clicking the '${btnName}' ${btnType}`);
+    
     await btn.click();
 });
 
@@ -47,77 +53,58 @@ When("I click the {string} button", async (btnName: string) => {
 When("I enter {string} as destination", async (destCity: string) => {
     const txtField = await page.getByPlaceholder(obj.destTxtFieldPlaceholder);
     await obj.fillIn(destCity, txtField);
-
     const tripTitls = await page.locator(obj.tripTitles);
+    log.debug(`Trip titles locator value: ${await tripTitls.first().textContent()}`);
+    
     await expect(tripTitls.first()).toBeVisible();
 });
 
 // I should see the url includes "38.171651,-122.6790579" coordinates
 Then("I should see the url includes {string} coordinates", async (coords: string) => {
-    try {
-        await page.waitForURL(helperUtils.regex);
-        log.info("URL matches coordinate regex pattern");
-    } catch (error) {
-        log.error(`URL does not match expected coordinate regex pattern: ${helperUtils.regex}`);
-        throw error; // Re-throw to fail the test
-    }
+    const expectedFormatted = helperUtils.formatToPointOne(coords);
 
     try {
-        await page.waitForURL(new RegExp(`${coords}`));
-        log.info(`URL contains expected coordinates: ${coords}`);
+        // Wait for the URL to contain coordinates that match the expected format.
+        // This will retry on every URL change until there is a matche or timeout occurs.
+        await page.waitForURL((url: URL) => {
+            const coordinates = url.toString().match(helperUtils.regex)?.[0] ?? null;
+            if (!coordinates) return false;
+            const actualFormatted = helperUtils.formatToPointOne(coordinates);
+            log.debug(`URL coords: ${actualFormatted}, expected: ${expectedFormatted}`);
+            return actualFormatted === expectedFormatted;
+        });
+        log.debug(`URL contains expected coordinates: ${expectedFormatted}`);
     } catch (error) {
-        log.error(`URL does not contain expected coordinates: ${coords}`);
-        throw error; // Re-throw to fail the test
+        log.error(`URL never matched expected coordinates: ${expectedFormatted}. Current URL: ${page.url()}`);
+        throw error;
     }
-
-    let url: string = page.url();
-    const coordinates = await helperUtils.extractCoordinatesFromURL(url);
-
-    assert.strictEqual(coordinates, coords, `The url ${url} contains the coordinates ${coords}`);
 });
 
-Then("I should see following source and destination locations in the side panelbar:", async (dataTable) => {
+Then("I should see following source and destination locations in the searchbars:", async (dataTable) => {
     const locations = dataTable.raw();
-    log.info(`Verifying locations in side panel: ${locations}`);
-    const searchBox = page.locator(obj.srcDestSidePanel).filter({visible: true});
-    log.info(`Search box value: ${searchBox}`);
-    const inputTxt: string[] = await obj.getValsByEleAttr(searchBox);
-    log.info(`Input text values: ${inputTxt}`);
+    const searchBoxes = page.locator(`${obj.srcTxtBox}, ${obj.destTxtBox}`).filter({ visible: true });
+    const inputTxt: string[] = await obj.getValsByEleAttr(searchBoxes);
+
     inputTxt.forEach((txt: string, index: number) => {
         const exist: boolean = txt.includes(locations[index]);
-        assert.ok(exist, `Location ${locations[index]} is present in the side panel`);
+        assert.ok(exist, `Location ${locations[index]} is present in the searchbars`);
     });
 });
 
 // I save all routes to a text file "directions.txt"
 Then("I save all routes to a text file {string}", async (fileName: string) => {
     log.info(`Saving routes to file: ${fileName}`);
-    const modesAttr = page.locator(obj.trvlModes)
-    await expect(modesAttr.first()).toBeVisible();
+    const modesAttr = page.locator(obj.trvlModes).first();
+    await expect(modesAttr).toBeVisible();
     const dirModes: string[] = await obj.getValsByEleAttr(modesAttr);
-    const dirTitles = page.locator(obj.tripTitles)
-    const timeDivs = page.locator(obj.tripTimes)
-    const milesDivs = page.locator(obj.tripMiles)
+    const dirTitles = page.locator(obj.tripTitles);
+    const timeDivs = page.locator(obj.tripTimes);
+    const milesDivs = page.locator(obj.tripMiles);
     await expect(dirTitles.first()).toBeVisible();
+    const [h1s, time, miles] = await Promise.all([dirTitles.all(), timeDivs.all(), milesDivs.all()]);
 
-    const h1s = await dirTitles.all();
-    const time = await timeDivs.all();
-    const miles = await milesDivs.all();
-
-    log.info(`Found ${h1s.length} routes`);
-
-    const routes: string[] = [];
-    for (let i = 0; i < h1s.length; i++) {
-        const mode = i < dirModes.length ? dirModes[i] : 'N/A';
-        const route = await h1s[i].innerText();
-        const timeText = i < time.length ? await time[i].innerText() : 'N/A';
-        const milesText = i < miles.length ? await miles[i].innerText() : 'N/A';
-        
-        const routeInfo = `Mode: ${mode}\nDirections: ${route}\nTime: ${timeText}\nMiles: ${milesText}`;
-        routes.push(routeInfo);
-        log.debug(`Route ${i + 1}: ${route}`);
-    }
-    log.debug(`Route from routes: ${routes}`);
+    const routes = await helperUtils.buildRoutesSummary(h1s, time, miles, dirModes);
+    log.debug(`Routes: ${routes}`);
 
     const content = routes.join('\n---\n')
     const fileContent = await helperUtils.writeToFile(fileName, content);

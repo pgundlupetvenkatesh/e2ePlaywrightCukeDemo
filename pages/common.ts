@@ -8,9 +8,11 @@ export class Common {
     destTxtFieldPlaceholder = 'Choose starting point, or click on the map...';
     srcDestSidePanel = "div[id='section-directions-trip-details-msg-0']";
     trvlModes = "span[class='Os0QJc google-symbols']";
-    tripTitles = "h1[id^='section-directions-trip-title-']";
-    tripTimes = "div[class^='Fk3sm fontHeadlineSmall']";
+    tripTitles = "h1[class*='VuCHmb fontHeadlineSmall']";
+    tripTimes = "div[class='Fk3sm fontHeadlineSmall bkVTGe']";
     tripMiles = "div[class='ivN21e tUEI8e fontBodyMedium']";
+    srcTxtBox = "input[aria-label^='Starting']";
+    destTxtBox = "input[aria-label^='Destination']";
 
     constructor(page: Page) {
         this.page = page;
