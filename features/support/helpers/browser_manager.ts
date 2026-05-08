@@ -1,4 +1,7 @@
 import { chromium, firefox, webkit, type Browser } from "@playwright/test";
+import { getlog } from '../hooks.ts';
+
+let log = getlog();
 
 const options = {
     headless: process.env.HEADLESS === 'true' ? true : false,
@@ -6,6 +9,7 @@ const options = {
 }
 
 export const launchBrowser = async (browserType?: string) => {
+    log.info(`headless: ${process.env.HEADLESS ? 'true' : 'false'}`);
     browserType = process.env.BROWSER || "chrome";
     
     switch (browserType) {
